@@ -238,6 +238,70 @@ Although the **TensorFlow model** demonstrated slightly higher recall and F1 sco
 
 ✅ **Summary**: XGBoost provided an ideal trade-off between predictive strength, model interpretability, scoring calibration, and speed — making it the optimal choice for production scoring.
 
+Perfect—let’s **summarize your entire process step by step in clear prose you can drop into your README or a report**:
+
+---
+
+## 📈 **Probability Scoring and Calibration Workflow**
+
+### 1️⃣ Initial Probability Prediction
+After training the **XGBoost** model, we generated *raw default probabilities* using:
+
+```python
+default_probs = model_xgb.predict_proba(X_scaled)[:, 1]
+```
+
+To create a more intuitive scoring scale, these probabilities were inverted (since *higher probability = higher risk*) and scaled to a **0–100 Asset Quality Score**:
+
+✅ **Outcome:**
+* Each loan received a continuous score between 0 (worst quality, highest risk) and 100 (best quality, lowest risk).
+* **Observation:**
+  The model was **underconfident**—even genuinely high-risk loans often received mid-range scores rather than very low ones, as visible in the first graph.
+---
+
+### 2️⃣ Probability Calibration
+To correct this underconfidence and improve the reliability of the scores, we applied **Isotonic Regression calibration**:
+
+  * It is non-parametric and can flexibly map predicted probabilities to observed frequencies without assuming a logistic shape.
+  * Improves how well predicted probabilities align with actual default rates.
+
+* Recomputed the asset scores:
+  The second density plot showed **better separation**: Defaulted loans were much more concentrated in the lowest deciles.
+---
+
+### 3️⃣ Decile Binning
+
+To further simplify interpretation, the calibrated scores were divided into **10 deciles**:
+
+* **Decile 1** = worst 10% of loans by predicted quality.
+* **Decile 10** = best 10%.
+
+### 4️⃣ Assigning Integer Scores and Grades
+
+To create even simpler business-friendly labels:
+
+* **Integer Asset Quality Score:** 1–10 (based on decile).
+* **Grades:**
+
+| Decile | Grade                 |
+| ------ | --------------------- |
+| 1      | E - Extremely Risky   |
+| 2      | D - Risky             |
+| 3–4    | C - Medium Quality    |
+| 5–6    | B - Good Quality      |
+| 7–10   | A - Excellent Quality |
+
+### 5️⃣ Saving Final Outputs
+
+The enriched dataset included:
+* Raw calibrated probabilities
+* Continuous 0–100 asset quality scores
+* Integer decile scores
+* Categorical grades
+
+
+
+
 
 
 
