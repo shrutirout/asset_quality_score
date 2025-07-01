@@ -134,5 +134,111 @@ After preprocessing, the dataset had:
 * Ensures the model trains on the most informative features only.
 * Final preprocessed file saved as: `processed_loan_csv.csv`
 
+## 🧠 Model Development & Evaluation
+
+To predict the likelihood of default and assign an asset quality score, we trained and evaluated multiple machine learning and deep learning models using cleaned and feature-engineered data.
+
+### ⚙️ Data Preparation
+
+* **Target Variable**: `loan_status_binary`
+  (0 = Non-default, 1 = Default)
+
+* **Train-Test Split**:
+  * Stored in:
+    * `outputs/X_train.csv`
+    * `outputs/X_test.csv`
+    * `outputs/y_train.csv`
+    * `outputs/y_test.csv`
+
+* **Scaling**:
+  * `StandardScaler()` applied to:
+    * Logistic Regression
+    * SVM
+    * k-NN
+    * Deep Learning (TensorFlow, PyTorch)
+  * Not applied to tree-based models (XGBoost, RF, DT)
+
+* **Handling Class Imbalance**:
+  * Dataset is heavily imbalanced (only \~13% default)
+  * **SMOTE** applied for:
+    * Logistic Regression (SMOTE)
+    * SVM
+  because they are susceptible to class imbalance and Distance-based.
+
+### 🤖 Models Trained
+
+| Category           | Models                                                                         |
+| ------------------ | ------------------------------------------------------------------------------ |
+| **Traditional ML** | Logistic Regression, Logistic Regression (SMOTE), Decision Tree, Random Forest |
+| **Distance-based** | k-NN                                                                           |
+| **Kernel Methods** | SVM                                                                            |
+| **Ensemble**       | XGBoost                                                                        |
+| **Deep Learning**  | TensorFlow MLP, PyTorch MLP                                                    |
+
+### 🔧 Hyperparameter Tuning
+
+* **XGBoost**:
+  * GridSearchCV used for:
+    * `max_depth`, `learning_rate`, `n_estimators`, `subsample`, `colsample_bytree`
+  * Best model saved at:
+    `outputs/best_xgboost.pkl`
+
+* **Deep Learning (TF & PyTorch)**:
+  * Optimized for:
+    * Epochs
+    * Hidden layers
+    * Dropout rates
+    * Early stopping
+  * Used ReLU activations, Adam optimizer, batch normalization
+
+### 📈 Evaluation Metrics
+Models were evaluated using:
+* Accuracy
+* Precision
+* Recall
+* F1 Score
+* AUC-ROC
+
+### 📊 Final Model Comparison
+
+| Model                       | Accuracy | Precision | Recall | F1 Score | AUC    |
+| --------------------------- | -------- | --------- | ------ | -------- | ------ |
+| **TensorFlow**              | 0.9610   | 0.9379    | 0.7261 | 0.8185   | 0.9657 |
+| **PyTorch**                 | 0.9530   | 0.9006    | 0.6884 | 0.7804   | 0.9561 |
+| **XGBoost**                 | 0.9415   | 0.9388    | 0.5534 | 0.6964   | 0.9551 |
+| Logistic Regression (SMOTE) | 0.8080   | 0.3674    | 0.8087 | 0.5052   | 0.8925 |
+| Logistic Regression         | 0.9074   | 0.7628    | 0.3425 | 0.4727   | 0.8903 |
+| SVM                         | 0.9016   | 0.7873    | 0.2587 | 0.3895   | 0.8879 |
+| Random Forest               | 0.8981   | 0.9013    | 0.1793 | 0.2991   | 0.8870 |
+| Decision Tree               | 0.8856   | 0.6672    | 0.1134 | 0.1938   | 0.7783 |
+| k-NN                        | 0.8755   | 0.4513    | 0.1256 | 0.1965   | 0.6730 |
+
+
+### ✅ Final Model Selection: **XGBoost**
+
+Although the **TensorFlow model** demonstrated slightly higher recall and F1 scores, we ultimately selected **XGBoost** for final deployment due to a combination of practical, interpretability, and scoring reasons:
+* **Interpretability**:
+  XGBoost is inherently more interpretable compared to deep learning. It seamlessly integrates with tools like **SHAP** and **LIME**, allowing us to explain **why a loan was marked risky** — a crucial requirement for lending systems.
+* **Probability-Based Scoring**:
+  XGBoost’s `.predict_proba()` method produces **well-calibrated default probabilities** which we used to derive **asset quality scores** on a 0–100 scale. These scores aligned meaningfully with observed default densities.
+* **Calibration Compatibility**:
+  XGBoost responds well to **probability calibration techniques** like **Isotonic Regression** and **Platt Scaling**, improving the reliability of score-based thresholds (e.g., score > 95 = excellent quality). This enhanced the separation between defaulted and non-defaulted loan distributions.
+
+* **Performance vs Practicality**:
+
+  | Metric         | TensorFlow | XGBoost  |
+  | -------------- | ---------- | -------- |
+  | F1 Score       | **0.8185** | 0.6964   |
+  | AUC-ROC        | **0.9657** | 0.9551   |
+  | Training Speed | ❌ Slower   | ✅ Faster |
+  | Explainability | ❌ Limited  | ✅ High   |
+
+* **Efficiency**:
+  XGBoost is significantly faster to train and tune, especially with cross-validation and large tabular data like this LendingClub dataset.
+
+✅ **Summary**: XGBoost provided an ideal trade-off between predictive strength, model interpretability, scoring calibration, and speed — making it the optimal choice for production scoring.
+
+
+
 
 
