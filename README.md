@@ -72,12 +72,12 @@ The most insightful visualization was a **correlation heatmap** capturing the re
 
 #### 📉 Other Key Visualizations (Explored During EDA)
 
-Interest Rate Analysis: Defaulted loans were associated with significantly higher `int_rate`, as shown through **boxplots**, **violin plots**, and **histograms**.
-Loan Amount & Installments: Higher `loan_amnt` and `installment` values were slightly more common among defaulted borrowers, although not as predictive.
-Loan Term: A clear difference in default rates was visible across loan terms, with longer-term loans showing a marginally higher default tendency.
-Borrower Behavior & Credit History: Features like `revol_util`, `bc_util`, and `inq_last_6mths` provided meaningful differentiation between risky and safe profiles.
-Repayment Features:`total_rec_late_fee` and `total_rec_int` visualizations demonstrated that defaulted borrowers often had poor repayment history or very low interest recovery.
-Demographics & Income: Features like `annual_inc` and `dti` (debt-to-income) were explored, but their predictive contribution was moderate.
+* Interest Rate Analysis: Defaulted loans were associated with significantly higher `int_rate`, as shown through **boxplots**, **violin plots**, and **histograms**.
+* Loan Amount & Installments: Higher `loan_amnt` and `installment` values were slightly more common among defaulted borrowers, although not as predictive.
+* Loan Term: A clear difference in default rates was visible across loan terms, with longer-term loans showing a marginally higher default tendency.
+* Borrower Behavior & Credit History: Features like `revol_util`, `bc_util`, and `inq_last_6mths` provided meaningful differentiation between risky and safe profiles.
+* Repayment Features:`total_rec_late_fee` and `total_rec_int` visualizations demonstrated that defaulted borrowers often had poor repayment history or very low interest recovery.
+* Demographics & Income: Features like `annual_inc` and `dti` (debt-to-income) were explored, but their predictive contribution was moderate.
 
 #### ✅ Final Outcome:
 
