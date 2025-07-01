@@ -299,6 +299,30 @@ The enriched dataset included:
 * Integer decile scores
 * Categorical grades
 
+## 🧠 **Model Explainability**
+
+**1️⃣ SHAP Analysis (Global Interpretability)**
+* **Top Positive Contributors to Default Risk:**
+  * Low `total_rec_prncp` (principal repaid)
+  * Low `last_pymnt_amnt` (recent payment)
+  * High `int_rate` (interest rate)
+  * Poor `sub_grade` and `grade`
+  * High `installment` amounts
+* Features like `total_rec_late_fee` and `payment_burden` also contributed to increased risk.
+* Colors in the summary plot:
+  * **Red:** High feature values (e.g., high interest rate)
+  * **Blue:** Low feature values
+* The SHAP values show how each feature pushes the prediction towards default or non-default.
+
+
+**2️⃣ LIME Analysis (Local Interpretability)**
+* For a single observation (index `100`):
+
+  * The prediction was **70% default probability**.
+  * LIME identified the top features pushing the probability towards default (e.g., high `grade`, high `payment_burden`) and non-default (e.g., higher `last_pymnt_amnt`).
+  * The LIME explanation was saved as an **interactive HTML file** for easy inspection.
+
+
 
 
 
