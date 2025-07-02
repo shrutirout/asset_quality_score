@@ -269,6 +269,25 @@ Although the **TensorFlow model** demonstrated slightly higher recall and F1 sco
 * **Efficiency**:
   XGBoost is significantly faster to train and tune, especially with cross-validation and large tabular data like this LendingClub dataset.
 
+📊 XGBoost Performance
+Confusion Matrix:
+[[219952   1100]
+ [ 13620  16880]]
+              precision    recall  f1-score   support
+
+         0.0       0.94      1.00      0.97    221052
+         1.0       0.94      0.55      0.70     30500
+
+    accuracy                           0.94    251552
+   macro avg       0.94      0.77      0.83    251552
+weighted avg       0.94      0.94      0.93    251552
+
+Accuracy:  0.9415
+Precision: 0.9388
+Recall:    0.5534
+F1 Score:  0.6964
+ROC AUC:   0.9551
+
 ✅ **Summary**: XGBoost provided an ideal trade-off between predictive strength, model interpretability, scoring calibration, and speed — making it the optimal choice for production scoring.
 
 ## 📈 **Probability Scoring and Calibration Workflow**
