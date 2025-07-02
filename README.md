@@ -7,6 +7,7 @@ Due to GitHub's file size limitations, the full LendingClub dataset (~1.2 GB) is
 - X_trained, X_test, y_train, y_test are stored in this link for your review: https://drive.google.com/drive/folders/1HirZ5G30Hy7RV8MOGq59SubC0pB3y2uP?usp=drive_link
 
 Project Directory is as follows: 
+
 asset_quality_score/
 ├── data/
 │ ├── raw/ — 🔹 Raw CSV data (e.g., original loan.csv from Kaggle)
