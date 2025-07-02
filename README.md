@@ -6,6 +6,35 @@ Due to GitHub's file size limitations, the full LendingClub dataset (~1.2 GB) is
 - All the raw/processed datasets are present at this link for your review: https://drive.google.com/drive/folders/1WU4JOSu-9CW0uW7kT4SZ-hCSxcSI7yoa?usp=drive_link
 - X_trained, X_test, y_train, y_test are stored in this link for your review: https://drive.google.com/drive/folders/1HirZ5G30Hy7RV8MOGq59SubC0pB3y2uP?usp=drive_link
 
+Project Directory is as follows: 
+
+asset_quality_score/
+├── data/
+│   ├── raw/                         # 🔹 Raw CSV data (e.g., loan.csv from Kaggle)
+│   ├── processed/                   # 🔹 Cleaned dataset after EDA (processed_loan_csv.csv)
+│
+├── notebooks/
+│   ├── 1_EDA.ipynb                  # 🧹 Data cleaning, missing value treatment, feature engineering
+│   ├── 2_feature_analysis.ipynb    # 📊 Feature correlation, pruning, and transformation
+│   ├── 3_baseline_models.ipynb     # 🤖 Logistic Regression, Decision Tree
+│   ├── 4_advanced_models_xgboost_rf.ipynb  # 🌲 XGBoost and Random Forest + hyperparameter tuning
+│   ├── 5_svm_knn_logistic_scaled.ipynb     # 📏 Logistic Regression with tuning, k-NN and SVM + SMOTE + scaling
+│   ├── 6_tensorflow_pytorch.ipynb         # 🧠 Deep learning using TensorFlow and PyTorch
+│   ├── 7_final_comparison.ipynb           # 📈 Comparison of all models on ROC, precision, recall, F1
+|   ├── 8_asset_quality_score.ipynb         # Calculating the asset quality score using calibration and .predict_proba
+│   └── 9_scoring_explainability.ipynb     # ✅ Final scoring, calibration, SHAP/LIME explainability
+│
+├── outputs/
+│   ├── baseline results in a JSON file
+│   ├── 7 other models
+│   └── lime_explanation.html      # 💡 LIME HTML explanation
+│   ├── X_train.csv                 # 🧪 Train/test splits
+│   ├── X_test.csv
+│   ├── y_train.csv
+│   ├── y_test.csv
+│
+├── requirements.txt               # 📦 Python dependencies for full reproducibility
+├── README.md                      # 📘 Project overview, methodology, results, and references
 
 #### 📊 1. Exploratory Data Analysis (EDA)
 
@@ -246,10 +275,6 @@ Although the **TensorFlow model** demonstrated slightly higher recall and F1 sco
   XGBoost is significantly faster to train and tune, especially with cross-validation and large tabular data like this LendingClub dataset.
 
 ✅ **Summary**: XGBoost provided an ideal trade-off between predictive strength, model interpretability, scoring calibration, and speed — making it the optimal choice for production scoring.
-
-Perfect—let’s **summarize your entire process step by step in clear prose you can drop into your README or a report**:
-
----
 
 ## 📈 **Probability Scoring and Calibration Workflow**
 
