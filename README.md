@@ -7,7 +7,33 @@ Due to GitHub's file size limitations, the full LendingClub dataset (~1.2 GB) is
 - X_trained, X_test, y_train, y_test are stored in this link for your review: https://drive.google.com/drive/folders/1HirZ5G30Hy7RV8MOGq59SubC0pB3y2uP?usp=drive_link
 
 Project Directory is as follows: 
-<pre lang="text"><code> ```text asset_quality_score/ ├── data/ │ ├── raw/ # 🔹 Raw CSV data (e.g., loan.csv from Kaggle) │ ├── processed/ # 🔹 Cleaned dataset after EDA (processed_loan_csv.csv) ├── notebooks/ │ ├── 1_EDA.ipynb # 🧹 Data cleaning, missing value treatment, feature engineering │ ├── 2_feature_analysis.ipynb # 📊 Feature correlation, pruning, and transformation │ ├── 3_baseline_models.ipynb # 🤖 Logistic Regression, Decision Tree │ ├── 4_advanced_models_xgboost_rf.ipynb # 🌲 XGBoost and Random Forest + hyperparameter tuning │ ├── 5_svm_knn_logistic_scaled.ipynb # 📏 Logistic Regression with tuning, k-NN and SVM + SMOTE + scaling │ ├── 6_tensorflow_pytorch.ipynb # 🧠 Deep learning using TensorFlow and PyTorch │ ├── 7_final_comparison.ipynb # 📈 Comparison of all models on ROC, precision, recall, F1 │ ├── 8_asset_quality_score.ipynb # 📊 Calculating the asset quality score using calibration and .predict_proba │ └── 9_scoring_explainability.ipynb # ✅ Final scoring, calibration, SHAP/LIME explainability ├── outputs/ │ ├── baseline_results.json # 📁 Baseline metrics for reference │ ├── best_xgboost.pkl # 💾 Saved XGBoost model │ ├── lime_explanation.html # 💡 LIME HTML explanation for model interpretability │ ├── X_train.csv # 🧪 Train features │ ├── X_test.csv # 🧪 Test features │ ├── y_train.csv # 🎯 Train labels │ ├── y_test.csv # 🎯 Test labels ├── requirements.txt # 📦 Python dependencies for full reproducibility ├── README.md # 📘 Project overview, methodology, results, and references ``` </code></pre>
+asset_quality_score/
+├── data/
+│ ├── raw/ — 🔹 Raw CSV data (e.g., original loan.csv from Kaggle)
+│ ├── processed/ — 🔹 Cleaned dataset after EDA (processed_loan_csv.csv)
+
+├── notebooks/
+│ ├── 1_EDA.ipynb — 🧹 Data cleaning, missing value treatment, feature engineering
+│ ├── 2_feature_analysis.ipynb — 📊 Feature correlation, pruning, and transformation
+│ ├── 3_baseline_models.ipynb — 🤖 Logistic Regression, Decision Tree
+│ ├── 4_advanced_models_xgboost_rf.ipynb — 🌲 XGBoost and Random Forest with hyperparameter tuning
+│ ├── 5_svm_knn_logistic_scaled.ipynb — 📏 Logistic Regression (scaled), SVM, k-NN + SMOTE
+│ ├── 6_tensorflow_pytorch.ipynb — 🧠 Deep learning using TensorFlow and PyTorch
+│ ├── 7_final_comparison.ipynb — 📈 Model performance comparison (ROC, precision, recall, F1)
+│ ├── 8_asset_quality_score.ipynb — 📊 Probability-based asset quality score calculation
+│ └── 9_scoring_explainability.ipynb — ✅ Final scoring, calibration, SHAP/LIME explainability
+
+├── outputs/
+│ ├── baseline_results.json — 📁 Baseline model evaluation metrics
+│ ├── best_xgboost.pkl — 💾 Trained XGBoost model
+│ ├── lime_explanation.html — 💡 LIME output for local model explainability
+│ ├── X_train.csv — 🧪 Training features
+│ ├── X_test.csv — 🧪 Test features
+│ ├── y_train.csv — 🎯 Training labels
+│ ├── y_test.csv — 🎯 Test labels
+
+├── requirements.txt — 📦 Python dependencies for full reproducibility
+├── README.md — 📘 Project overview, documentation, methodology, evaluation, and references
 
 #### 📊 1. Exploratory Data Analysis (EDA)
 
