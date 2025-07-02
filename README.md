@@ -1,3 +1,24 @@
+📜 Project Goal
+This project aims to enhance the lending decision process by implementing data-driven asset quality scoring using machine learning. We develop an ML model for 'Asset Quality Scoring' that predicts default risk based on historical loan performance data from LendingClub, enabling transparent and explainable loan approval decisions. The model incorporates explainability features using SHAP and LIME to provide transparent justifications for predicted scores, supporting banks in minimizing risk while maintaining regulatory compliance and fair lending practices.
+
+🎯 Methodology & Approach
+Phase 1: Comprehensive Data Understanding
+We began with extensive exploratory data analysis on the LendingClub dataset (2.26M records, 145+ features) to understand loan performance patterns, default distributions, and feature relationships. This foundation was critical given the highly imbalanced nature of the data (86.86% good loans vs. 13.14% defaults), which required specialized handling throughout the pipeline.
+
+Phase 2: Strategic Feature Engineering
+Rather than relying solely on raw features, we engineered domain-specific financial ratios and risk indicators (payment_burden, utilization_ratio, delinquency_score) that better capture borrower risk profiles. We implemented a dual outlier treatment strategy - preserving risk-informative outliers while normalizing distributions in low-impact features.
+
+Phase 3: Multi-Model Evaluation Framework
+We trained and compared 9 different algorithms across traditional ML, ensemble methods, and deep learning to identify the optimal approach. This included handling class imbalance through SMOTE for distance-based algorithms and careful scaling for neural networks.
+
+Phase 4: Probability-Based Scoring Paradigm
+Initially, we attempted manual asset quality calculation using weighted financial ratios, but this approach failed to adequately distinguish risk levels since many poor-quality loans still didn't default. We pivoted to a probability-based approach, using calibrated default probabilities from our best-performing model (XGBoost) to derive asset quality scores. This ensured scores aligned with actual default likelihood, maximizing bank loss prevention.
+
+Phase 5: Model Calibration & Interpretability
+We addressed model confidence issues through Isotonic Regression calibration and implemented decile binning for business-friendly scoring (1-10 scale with letter grades). SHAP and LIME explainability tools were integrated to provide transparent, feature-level justifications for individual predictions.
+
+This methodology ensures our asset quality scores are not only statistically robust but also practically useful for lending decisions and regulatory compliance.
+
 📂 Dataset Information
 
 Due to GitHub's file size limitations, the full LendingClub dataset (~1.2 GB) is not included here.
