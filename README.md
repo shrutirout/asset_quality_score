@@ -1,3 +1,12 @@
+📂 Dataset Information
+
+Due to GitHub's file size limitations, the full LendingClub dataset (~1.2 GB) is not included here.
+- 🔗 The full dataset can be downloaded from: https://www.kaggle.com/datasets/adarshsng/lending-club-loan-data-csv
+- 🛠️ To reproduce the full version, use the preprocessing notebook `1_EDA.ipynb` on the raw CSV.
+- All the raw/processed datasets are present at this link for your review: https://drive.google.com/drive/folders/1WU4JOSu-9CW0uW7kT4SZ-hCSxcSI7yoa?usp=drive_link
+- X_trained, X_test, y_train, y_test are stored in this link for your review: https://drive.google.com/drive/folders/1HirZ5G30Hy7RV8MOGq59SubC0pB3y2uP?usp=drive_link
+
+
 #### 📊 1. Exploratory Data Analysis (EDA)
 
 #### ✅ Dataset Overview:
