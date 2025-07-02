@@ -6,35 +6,31 @@ Due to GitHub's file size limitations, the full LendingClub dataset (~1.2 GB) is
 - All the raw/processed datasets are present at this link for your review: https://drive.google.com/drive/folders/1WU4JOSu-9CW0uW7kT4SZ-hCSxcSI7yoa?usp=drive_link
 - X_trained, X_test, y_train, y_test are stored in this link for your review: https://drive.google.com/drive/folders/1HirZ5G30Hy7RV8MOGq59SubC0pB3y2uP?usp=drive_link
 
-Project Directory is as follows: 
+### 📁 Project Directory Structure (Flat Bullet Format)
 
-asset_quality_score/
-├── data/
-│ ├── raw/ — 🔹 Raw CSV data (e.g., original loan.csv from Kaggle)
-│ ├── processed/ — 🔹 Cleaned dataset after EDA (processed_loan_csv.csv)
+* **data/**
+  * `raw/`: Contains raw CSV data files (e.g., `loan.csv` downloaded from Kaggle)
+  * `processed/`: Contains cleaned and preprocessed datasets like `processed_loan_csv.csv`
 
-├── notebooks/
-│ ├── 1_EDA.ipynb — 🧹 Data cleaning, missing value treatment, feature engineering
-│ ├── 2_feature_analysis.ipynb — 📊 Feature correlation, pruning, and transformation
-│ ├── 3_baseline_models.ipynb — 🤖 Logistic Regression, Decision Tree
-│ ├── 4_advanced_models_xgboost_rf.ipynb — 🌲 XGBoost and Random Forest with hyperparameter tuning
-│ ├── 5_svm_knn_logistic_scaled.ipynb — 📏 Logistic Regression (scaled), SVM, k-NN + SMOTE
-│ ├── 6_tensorflow_pytorch.ipynb — 🧠 Deep learning using TensorFlow and PyTorch
-│ ├── 7_final_comparison.ipynb — 📈 Model performance comparison (ROC, precision, recall, F1)
-│ ├── 8_asset_quality_score.ipynb — 📊 Probability-based asset quality score calculation
-│ └── 9_scoring_explainability.ipynb — ✅ Final scoring, calibration, SHAP/LIME explainability
+* **notebooks/**
+  * `1_EDA.ipynb`: Performs data cleaning, missing value handling, and feature engineering
+  * `2_feature_analysis.ipynb`: Conducts correlation analysis, feature pruning, and transformations
+  * `3_baseline_models.ipynb`: Trains baseline models (Logistic Regression, Decision Tree)
+  * `4_advanced_models_xgboost_rf.ipynb`: Trains XGBoost and Random Forest with hyperparameter tuning
+  * `5_svm_knn_logistic_scaled.ipynb`: Trains scaled SVM, k-NN, and Logistic Regression with SMOTE
+  * `6_tensorflow_pytorch.ipynb`: Implements deep learning models using TensorFlow and PyTorch
+  * `7_final_comparison.ipynb`: Compares all model performances using ROC, F1, precision, recall
+  * `8_asset_quality_score.ipynb`: Generates probability-based asset quality scores
+  * `9_scoring_explainability.ipynb`: Final scoring, calibration, and interpretability using SHAP and LIME
 
-├── outputs/
-│ ├── baseline_results.json — 📁 Baseline model evaluation metrics
-│ ├── best_xgboost.pkl — 💾 Trained XGBoost model
-│ ├── lime_explanation.html — 💡 LIME output for local model explainability
-│ ├── X_train.csv — 🧪 Training features
-│ ├── X_test.csv — 🧪 Test features
-│ ├── y_train.csv — 🎯 Training labels
-│ ├── y_test.csv — 🎯 Test labels
+* **outputs/**
+  * `baseline_results.json`: Evaluation metrics for initial models
+  * `best_xgboost.pkl`: Saved best-performing XGBoost model
+  * `lime_explanation.html`: Interactive LIME explanation for a selected prediction
+  * `X_train.csv`, `X_test.csv`, `y_train.csv`, `y_test.csv`: Train-test split files for reproducibility
 
-├── requirements.txt — 📦 Python dependencies for full reproducibility
-├── README.md — 📘 Project overview, documentation, methodology, evaluation, and references
+* `requirements.txt`: Lists all Python libraries needed to run the project
+* `README.md`: Contains project overview, methodology, results, and references
 
 #### 📊 1. Exploratory Data Analysis (EDA)
 
