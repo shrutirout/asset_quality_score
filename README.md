@@ -479,11 +479,77 @@ To fully reproduce this asset quality scoring pipeline, follow the steps below. 
     jupyter notebook notebooks/9_scoring_explainability.ipynb
     ```
 
+#### ⚠️ Known Limitations
+Data & Scope Limitations
+* Absence of Macroeconomic Context: The model does not incorporate critical macroeconomic variables (GDP growth, unemployment rates, interest rate cycles, inflation) that significantly influence credit risk across economic cycles. This limits the model's ability to predict performance during economic downturns or expansions.
+* Historical Lending Policy Bias: The model inherits biases from LendingClub's historical lending policies and approval criteria from 2007-2015, potentially perpetuating discriminatory practices against certain demographic groups. This may not reflect fair lending standards or current regulatory requirements.
+* LendingClub-Specific Default Definitions: The model assumes LendingClub's specific definitions of default and loan status categories, which may not align with traditional banking definitions or regulatory standards used by other financial institutions.
 
+Technical & Methodological Limitations
+* Class Imbalance Sensitivity: Despite SMOTE application, the severe class imbalance (13.14% defaults) may lead to overoptimistic performance metrics and poor generalization to portfolios with different default rates.
+* Model Calibration Challenges: Deep learning models showed overconfidence while XGBoost was underconfident, requiring extensive calibration. This calibration dependency may not hold across different time periods or loan populations.
+* Limited Temporal Validation: The model lacks time-based validation across different economic cycles, potentially failing during market stress or changing economic conditions.
+* Feature Engineering Subjectivity: Engineered features rely on domain assumptions and fixed weightings that may not generalize across different lending environments or borrower populations.
 
+Validation & Generalization Issues
+* Single-Platform Bias: Training exclusively on LendingClub data limits generalizability to traditional bank lending, different loan products, or alternative lending platforms.
+* Lack of External Validation: The model has not been validated on external datasets or different financial institutions, raising concerns about out-of-sample performance and real-world applicability.
+* Static Model Architecture: The model doesn't account for concept drift - changes in borrower behavior, lending standards, or economic conditions over time.
 
+#### 🚀 Future Improvements
+Enhanced Data Integration
+* Macroeconomic Factor Incorporation: Integrate time-series macroeconomic indicators (GDP growth, unemployment, housing prices, consumer confidence) using time series analysis techniques like ARIMA models to improve predictions during economic cycles.
+* Alternative Data Sources: Incorporate non-traditional data such as social media behavior, transaction patterns, utility payment history, and employment verification data to improve risk assessment accuracy.
+* Real-Time Data Streaming: Implement dynamic updating mechanisms that continuously incorporate new loan performance data and borrower behavioral changes.
 
+Advanced Modeling Techniques
+* Time Series Classification Models: Implement Time Series Classification (TSC) algorithms that explicitly model the temporal aspects of loan performance, capturing payment patterns and behavioral evolution over time.
+* Deep Learning Calibration Improvements: Develop better neural network calibration methods beyond Isotonic Regression, including temperature scaling, Platt scaling, and specialized calibration architectures for imbalanced datasets.
+* Ensemble Meta-Learning: Create stacked ensemble models that combine predictions from multiple algorithms with learned meta-features, potentially improving both accuracy and calibration.
 
+Model Validation & Robustness
+* Cross-Portfolio Validation: Implement external validation frameworks using data from multiple lending institutions and loan types to ensure model generalizability.
+* Stress Testing Integration: Develop scenario-based stress testing capabilities that evaluate model performance under various economic conditions and market shocks.
+* Fairness-Aware Modeling: Implement bias detection and mitigation techniques to ensure fair lending compliance and reduce discriminatory outcomes across demographic groups.
 
+Operational Enhancements
+* Model Monitoring & Drift Detection: Establish automated model performance monitoring with drift detection capabilities to identify when retraining is necessary.
+* Explainability Standardization: Develop standardized explanation frameworks that provide consistent, regulation-compliant justifications for lending decisions across different stakeholder needs.
+* Multi-Horizon Prediction: Extend the model to provide risk predictions across multiple time horizons (6-month, 1-year, 3-year) rather than single-point estimates.
+* Integration with Loan Pricing: Develop Risk-Adjusted Return on Capital (RAROC) integration to directly connect asset quality scores with optimal loan pricing and portfolio management strategies.
 
-
+References
+* FasterCapital. "Challenges And Limitations In Asset Quality Measurement." 2020.
+* Lending Club Loan Data. Kaggle Dataset. https://www.kaggle.com/datasets/adarshsng/lending-club-loan-data-csv
+* FasterCapital. "Challenges And Limitations Of Asset Scoring."
+* Bank for International Settlements. "Credit Risk Modelling: Current Practices and Applications." BCBS Publications.
+* IOSR Journal. "Loan Default Prediction Using Machine Learning Techniques." Vol 25, Issue 5.
+* FasterCapital. "Challenges And Limitations Of Asset Scoring - FasterCapital."
+* DeFi Solutions. "Credit Risk Management Challenges & How to Overcome Them." November 2023.
+* Suhas Maddali. "Predicting Loan Default Using Machine Learning." GitHub Repository, 2021.
+* FDIC. "Asset Quality - FDIC Examination Manual."
+* AnalystPrep. "Introduction to Credit Risk Modeling and Assessment." November 2024.
+* Number Analytics. "Advanced Credit Risk Modeling." June 2025.
+* SCIRP. "Bank Loan Prediction Using Machine Learning Techniques." December 2024.
+* FasterCapital. "Understanding Time Series Analysis For Credit Risk Forecasting." 2025.
+* Anaptyss. "Modern Approaches in Credit Risk Modeling." September 2024.
+* ProjectPro. "Loan Prediction using Machine Learning Project Source Code." October 2024.
+* University of Twente. "Enhancing Credit Risk Prediction in Retail Banking: Integrating Time Series Classification."
+* arXiv. "Bank Loan Prediction Using Machine Learning Techniques." October 2024.
+* MDPI. "Credit Risk Scoring Forecasting Using a Time Series Approach."
+* MDPI. "Macroeconomic Determinants of Credit Risk." October 2022.
+* arXiv. "Calibration in Deep Learning: A Survey of the State-of-the-Art." 2022.
+* IMF eLibrary. "A Macro Stress Test Model of Credit Risk." December 2014.
+* SIST Sathyabama. "Loan Prediction Analysis Using Machine Learning Algorithm."
+* CVF Open Access. "Measuring Calibration in Deep Learning." 2019.
+* arXiv. "Analysing the Influence of Macroeconomic Factors on Credit Risk in the UK Banking Sector." 2024.
+* SIST Sathyabama. "Customer Loan Prediction Analysis."
+* PLOS ONE. "Deep learning model calibration for improving performance in class-imbalanced medical image classification tasks." January 2022.
+* Mililink. "LOAN APPROVAL PREDICTION MODEL A COMPARATIVE ANALYSIS."
+* Oxford Academic. "Measuring Bias in Consumer Lending." November 2021.
+* Moody's Analytics. "Validating Models Effectively - Model Validation."
+* Federal Reserve Bank of Philadelphia. "Evidence from the LendingClub Consumer Platform."
+* Elliott Davis. "CECL model validation challenges and best practices."
+* Scribd. "Loan Prediction System."
+* ScienceDirect. "Evidence from Lending Club and Renrendai."
+* LinkedIn. "Model Validation: The Key to Sound Financial Modelling and Risk Management." November 2023.
