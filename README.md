@@ -9,7 +9,7 @@ Due to GitHub's file size limitations, the full LendingClub dataset (~1.2 GB) is
 ### 📁 Project Directory Structure (Flat Bullet Format)
 
 * **data/**
-  * `raw/`: Contains raw CSV data files (e.g., `loan.csv` downloaded from Kaggle)
+  * `raw/`: Contains raw CSV data files ( `loan.csv` downloaded from Kaggle)
   * `processed/`: Contains cleaned and preprocessed datasets like `processed_loan_csv.csv`
 
 * **notebooks/**
