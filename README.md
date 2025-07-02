@@ -6,7 +6,7 @@ Due to GitHub's file size limitations, the full LendingClub dataset (~1.2 GB) is
 - All the raw/processed datasets are present at this link for your review: https://drive.google.com/drive/folders/1WU4JOSu-9CW0uW7kT4SZ-hCSxcSI7yoa?usp=drive_link
 - X_trained, X_test, y_train, y_test are stored in this link for your review: https://drive.google.com/drive/folders/1HirZ5G30Hy7RV8MOGq59SubC0pB3y2uP?usp=drive_link
 
-### 📁 Project Directory Structure (Flat Bullet Format)
+### 📁 Project Directory Structure
 
 * **data/**
   * `raw/`: Contains raw CSV data files ( `loan.csv` downloaded from Kaggle)
@@ -79,7 +79,7 @@ Due to GitHub's file size limitations, the full LendingClub dataset (~1.2 GB) is
 * Useful for identifying skewed or heavy-tailed variables that may benefit from transformation.
 
 #### ✅ Categorical Feature Encoding:
-* The number of categorical features recognized were 10.
+* The number of categorical features recognized was 10.
 * Initial categorical features: `home_ownership`, `verification_status`, `issue_d`, `loan_status`, `purpose`, `zip_code`, `addr_state`, `earliest_cr_line`, `initial_list_status`, `application_type`.
 * Removed irrelevant or high-cardinality columns: `zip_code`, `issue_d`, `loan_status`, `earliest_cr_line`.
 * Remaining categorical columns (`addr_state`, `purpose`, etc.) were **label encoded** using `LabelEncoder`.
@@ -279,7 +279,6 @@ After training the **XGBoost** model, we generated *raw default probabilities* u
 ```python
 default_probs = model_xgb.predict_proba(X_scaled)[:, 1]
 ```
-
 To create a more intuitive scoring scale, these probabilities were inverted (since *higher probability = higher risk*) and scaled to a **0–100 Asset Quality Score**:
 
 ✅ **Outcome:**
@@ -307,7 +306,7 @@ To further simplify interpretation, the calibrated scores were divided into **10
 
 ### 4️⃣ Assigning Integer Scores and Grades
 
-To create even simpler business-friendly labels:
+To create even simpler, business-friendly labels:
 
 * **Integer Asset Quality Score:** 1–10 (based on decile).
 * **Grades:**
@@ -350,6 +349,95 @@ The enriched dataset included:
   * The prediction was **70% default probability**.
   * LIME identified the top features pushing the probability towards default (e.g., high `grade`, high `payment_burden`) and non-default (e.g., higher `last_pymnt_amnt`).
   * The LIME explanation was saved as an **interactive HTML file** for easy inspection.
+
+Here's a **📦 Reproducibility** section you can include in your `README.md`, tailored to your project structure and large dataset setup:
+
+---
+
+### ⚙️ Reproducibility
+
+To fully reproduce this asset quality scoring pipeline, follow the steps below. Note that due to GitHub size limitations, datasets are hosted externally.
+
+#### 🔁 Steps to Reproduce
+
+1. **📥 Clone the Repository**
+
+   ```bash
+   git clone https://github.com/yourusername/asset_quality_score.git
+   cd asset_quality_score
+   ```
+
+2. **📦 Install Dependencies**
+   Ensure you're using Python 3.10+ and install all dependencies:
+
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+3. **📂 Download the Dataset**
+
+   * Raw LendingClub data (\~1.2GB): [Kaggle Link](https://www.kaggle.com/datasets/adarshsng/lending-club-loan-data-csv)
+   * Alternatively, access cleaned and processed datasets at the links mentioned above.
+
+4. **🧹 Run EDA & Preprocessing**
+   Launch:
+
+   ```bash
+   jupyter notebook notebooks/1_EDA.ipynb
+   ```
+
+   * Cleans data, handles missing values, feature engineering, and saves `preprocessing_loan_csv.csv`
+
+5. **📊 Feature Analysis**
+
+   ```bash
+   jupyter notebook notebooks/2_feature_analysis.ipynb
+   ```
+
+   * Correlation, pruning, transformation, final feature set selection, and saves `processed_loan_csv.csv`.
+
+6. **🤖 Train Baseline Models**
+
+   ```bash
+   jupyter notebook notebooks/3_baseline_models.ipynb
+   ```
+
+7. **🌲 Train XGBoost / Random Forest**
+
+   ```bash
+   jupyter notebook notebooks/4_advanced_models_xgboost_rf.ipynb
+   ```
+
+8. **📏 Run SMOTE, SVM, k-NN with Scaling**
+
+   ```bash
+   jupyter notebook notebooks/5_svm_knn_logistic_scaled.ipynb
+   ```
+
+9. **🧠 Deep Learning Models**
+
+   ```bash
+   jupyter notebook notebooks/6_tensorflow_pytorch.ipynb
+   ```
+
+10. **📈 Model Evaluation & Comparison**
+
+    ```bash
+    jupyter notebook notebooks/7_final_comparison.ipynb
+    ```
+
+11. **🎯 Asset Quality Scoring**
+
+    ```bash
+    jupyter notebook notebooks/8_asset_quality_score.ipynb
+    ```
+   *saves `final_asset_quality_scores.csv`.
+
+12. **✅ Final Calibration & Explainability (SHAP, LIME)**
+
+    ```bash
+    jupyter notebook notebooks/9_scoring_explainability.ipynb
+    ```
 
 
 
