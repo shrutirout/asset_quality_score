@@ -10,8 +10,7 @@ Due to GitHub's file size limitations, the full LendingClub dataset (~1.2 GB) is
 
 * **data/**
   * `raw/`: Contains raw CSV data files ( `loan.csv` downloaded from Kaggle)
-  * `processed/`: Contains cleaned and preprocessed datasets like `processed_loan_csv.csv`
-
+  * `processed/`: Contains cleaned and preprocessed datasets
 * **notebooks/**
   * `1_EDA.ipynb`: Performs data cleaning, missing value handling, and feature engineering
   * `2_feature_analysis.ipynb`: Conducts correlation analysis, feature pruning, and transformations
