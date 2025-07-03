@@ -185,7 +185,7 @@ After preprocessing, the dataset had:
 * Cleaned and encoded feature set ready for modeling.
 * The output DataFrame includes **clean, normalized, robust numerical and encoded categorical variables** correlated with the target.
 * Ensures the model trains on the most informative features only.
-* Final preprocessed file saved as: `processed_loan_csv.csv`
+* Final processed file saved as: `processed_loan_csv.csv`
 
 ## 🧠 Model Development & Evaluation
 
@@ -420,7 +420,7 @@ To fully reproduce this asset quality scoring pipeline, follow the steps below. 
    jupyter notebook notebooks/1_EDA.ipynb
    ```
 
-   * Cleans data, handles missing values, feature engineering, and saves `preprocessing_loan_csv.csv`
+   * Cleans data, handles missing values, feature engineering, and saves `Preprocessing_Loan_CSV.csv`
 
 5. **📊 Feature Analysis**
 
