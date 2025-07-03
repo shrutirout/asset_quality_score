@@ -425,7 +425,7 @@ To fully reproduce this asset quality scoring pipeline, follow the steps below. 
 5. **📊 Feature Analysis**
 
    ```bash
-   jupyter notebook notebooks/2_feature_analysis.ipynb
+   jupyter notebook notebooks/2_Feature_Analysis.ipynb
    ```
 
    * Correlation, pruning, transformation, final feature set selection, and saves `processed_loan_csv.csv`.
@@ -451,7 +451,7 @@ To fully reproduce this asset quality scoring pipeline, follow the steps below. 
 9. **🧠 Deep Learning Models**
 
    ```bash
-   jupyter notebook notebooks/6_tensorflow_pytorch.ipynb
+   jupyter notebook notebooks/6_tensorflow_pytorch_models.ipynb
    ```
 
 10. **📈 Model Evaluation & Comparison**
@@ -470,7 +470,7 @@ To fully reproduce this asset quality scoring pipeline, follow the steps below. 
 12. **✅ Final Calibration & Explainability (SHAP, LIME)**
 
     ```bash
-    jupyter notebook notebooks/9_scoring_explainability.ipynb
+    jupyter notebook notebooks/9_explainability.ipynb
     ```
 
 #### ⚠️ Known Limitations
