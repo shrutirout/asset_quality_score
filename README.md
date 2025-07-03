@@ -12,7 +12,7 @@ Rather than relying solely on raw features, we engineered domain-specific financ
 We trained and compared 9 different algorithms across traditional ML, ensemble methods, and deep learning to identify the optimal approach. This included handling class imbalance through SMOTE for distance-based algorithms and careful scaling for neural networks.
 
 * Phase 4: Probability-Based Scoring Paradigm
-Initially, we attempted manual asset quality calculation using weighted financial ratios, but this approach failed to adequately distinguish risk levels since many poor-quality loans still didn't default. We pivoted to a probability-based approach, using calibrated default probabilities from our best-performing model (XGBoost) to derive asset quality scores. This ensured scores aligned with actual default likelihood, maximizing bank loss prevention.
+Initially, we attempted manual asset quality calculation using weighted financial ratios, but this approach failed to adequately distinguish risk levels since many poor-quality loans still didn't default. We pivoted to a probability-based approach, using calibrated default probabilities from one of our best-performing models (XGBoost) to derive asset quality scores. This ensured scores aligned with actual default likelihood, maximizing bank loss prevention.
 
 * Phase 5: Model Calibration & Interpretability
 We addressed model confidence issues through Isotonic Regression calibration and implemented decile binning for business-friendly scoring (1-10 scale with letter grades). SHAP and LIME explainability tools were integrated to provide transparent, feature-level justifications for individual predictions.
@@ -40,12 +40,12 @@ Due to GitHub's file size limitations, the full LendingClub dataset (~1.2 GB) is
   * `5_svm_knn_logistic_scaled.ipynb`: Trains scaled SVM, k-NN, and Logistic Regression with SMOTE
   * `6_tensorflow_pytorch.ipynb`: Implements deep learning models using TensorFlow and PyTorch
   * `7_final_comparison.ipynb`: Compares all model performances using ROC, F1, precision, recall
-  * `8_asset_quality_score.ipynb`: Generates probability-based asset quality scores
-  * `9_scoring_explainability.ipynb`: Final scoring, calibration, and interpretability using SHAP and LIME
+  * `8_asset_quality_score.ipynb`: Generates probability-based asset quality scores and final scoring
+  * `9_scoring_explainability.ipynb`: Generated interpretability using SHAP and LIME
 
 * **outputs/**
   * `baseline_results.json`: Evaluation metrics for initial models
-  * `best_xgboost.pkl`: Saved best-performing XGBoost model
+  * `model.pkl`: Saved 7 other models
   * `lime_explanation.html`: Interactive LIME explanation for a selected prediction
   * `X_train.csv`, `X_test.csv`, `y_train.csv`, `y_test.csv`: Train-test split files for reproducibility
 
@@ -90,7 +90,6 @@ Due to GitHub's file size limitations, the full LendingClub dataset (~1.2 GB) is
 * Initially **63 numerical columns** were identified.
 * Correlation with the target variable (`loan_status_binary`) was calculated.
 * Low-correlation features (correlation < `0.01`) were removed, such as:
-
   * `emp_length`, `chargeoff_within_12_mths`, `tot_coll_amt`, `delinq_amnt`.
   * At the end, **59 numerical features** were retained.
 
@@ -125,12 +124,12 @@ The most insightful visualization was a **correlation heatmap** capturing the re
 
 #### 📉 Other Key Visualizations (Explored During EDA)
 
-* Interest Rate Analysis: Defaulted loans were associated with significantly higher `int_rate`, as shown through **boxplots**, **violin plots**, and **histograms**.
-* Loan Amount & Installments: Higher `loan_amnt` and `installment` values were slightly more common among defaulted borrowers, although not as predictive.
-* Loan Term: A clear difference in default rates was visible across loan terms, with longer-term loans showing a marginally higher default tendency.
-* Borrower Behavior & Credit History: Features like `revol_util`, `bc_util`, and `inq_last_6mths` provided meaningful differentiation between risky and safe profiles.
-* Repayment Features:`total_rec_late_fee` and `total_rec_int` visualizations demonstrated that defaulted borrowers often had poor repayment history or very low interest recovery.
-* Demographics & Income: Features like `annual_inc` and `dti` (debt-to-income) were explored, but their predictive contribution was moderate.
+* Interest Rate Analysis
+* Loan Amount & Installments
+* Loan Term
+* Borrower Behavior & Credit History
+* Repayment Features
+* Demographics & Income
 
 ## 🔎 Outlier Detection & Treatment
 
@@ -217,7 +216,7 @@ To predict the likelihood of default and assign an asset quality score, we train
   * **SMOTE** applied for:
     * Logistic Regression (SMOTE)
     * SVM
-  because they are susceptible to class imbalance and Distance-based.
+  because they are susceptible to class imbalance and are based on distance.
 
 ### 🤖 Models Trained
 
@@ -232,7 +231,7 @@ To predict the likelihood of default and assign an asset quality score, we train
 ### 🔧 Hyperparameter Tuning
 
 * **XGBoost**:
-  * GridSearchCV used for:
+  * RandomizedSearchCV used for:
     * `max_depth`, `learning_rate`, `n_estimators`, `subsample`, `colsample_bytree`
   * Best model saved at:
     `outputs/best_xgboost.pkl`
@@ -390,12 +389,7 @@ The enriched dataset included:
   * LIME identified the top features pushing the probability towards default (e.g., high `grade`, high `payment_burden`) and non-default (e.g., higher `last_pymnt_amnt`).
   * The LIME explanation was saved as an **interactive HTML file** for easy inspection.
 
-Here's a **📦 Reproducibility** section you can include in your `README.md`, tailored to your project structure and large dataset setup:
-
----
-
 ### ⚙️ Reproducibility
-
 To fully reproduce this asset quality scoring pipeline, follow the steps below. Note that due to GitHub size limitations, datasets are hosted externally.
 
 #### 🔁 Steps to Reproduce
@@ -463,7 +457,7 @@ To fully reproduce this asset quality scoring pipeline, follow the steps below. 
 10. **📈 Model Evaluation & Comparison**
 
     ```bash
-    jupyter notebook notebooks/7_final_comparison.ipynb
+    jupyter notebook notebooks/7_Final_outputs.ipynb
     ```
 
 11. **🎯 Asset Quality Scoring**
